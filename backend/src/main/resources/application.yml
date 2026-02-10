@@ -1,0 +1,56 @@
+spring:
+  application:
+    name: community-hub-backend
+  
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/community_hub}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:YOUR_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+  
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+  
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB
+      max-request-size: 10MB
+  
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${MAIL_USERNAME:your-email@gmail.com}
+    password: ${MAIL_PASSWORD:your-app-password}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+server:
+  port: 8080
+  error:
+    include-message: always
+    include-binding-errors: always
+
+jwt:
+  secret: ${JWT_SECRET:404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970}
+  expiration: ${JWT_EXPIRATION:86400000} # 24 hours
+
+app:
+  frontend-url: ${FRONTEND_URL:http://localhost:3000}
+  upload-dir: ${UPLOAD_DIR:./uploads}
+
+logging:
+  level:
+    com.communityhub: DEBUG
+    org.springframework.security: DEBUG
+    org.springframework.web.socket: DEBUG
